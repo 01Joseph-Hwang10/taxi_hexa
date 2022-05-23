@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:taxi_hexa/themes/colors.dart';
+import 'package:taxi_hexa/widgets/common/elevated_circle_button.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,45 +17,12 @@ class Home extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              RawMaterialButton(
-                onPressed: () {}, //==================================
-                elevation: 2.0,
-                fillColor: const Color(0xFF205375),
-                padding: const EdgeInsets.all(15.0),
-                shape: const CircleBorder(
-                    side: BorderSide(color: Color(0xFFEFEFEF), width: 1.5)),
-                child: const Icon(
-                  Icons.gps_fixed,
-                  size: 35.0,
-                  color: Color(0xFFEFEFEF),
-                ),
-              ),
-              RawMaterialButton(
-                onPressed: () {}, //===================================
-                elevation: 2.0,
-                fillColor: const Color(0xFF205375),
-                padding: const EdgeInsets.all(15.0),
-                shape: const CircleBorder(
-                    side: BorderSide(color: Color(0xFFEFEFEF), width: 1.5)),
-                child: const Icon(
-                  Icons.question_mark,
-                  size: 35.0,
-                  color: Color(0xFFEFEFEF),
-                ),
-              ),
-              RawMaterialButton(
-                onPressed: () {}, //======================================
-                elevation: 2.0,
-                fillColor: const Color(0xFF205375),
-                padding: const EdgeInsets.all(15.0),
-                shape: const CircleBorder(
-                    side: BorderSide(color: Color(0xFFEFEFEF), width: 1.5)),
-                child: const Icon(
-                  Icons.refresh_sharp,
-                  size: 35.0,
-                  color: Color(0xFFEFEFEF),
-                ),
-              ),
+              elevatedCircleButton(
+                  Icons.gps_fixed, AppColors.col2, AppColors.col1, () => {}),
+              elevatedCircleButton(
+                  Icons.add, AppColors.col2, AppColors.col1, () => {}),
+              elevatedCircleButton(
+                  Icons.sync, AppColors.col2, AppColors.col1, () => {}),
             ],
           ),
         ),
