@@ -18,41 +18,41 @@ class Home extends StatelessWidget {
               RawMaterialButton(
                 onPressed: () {}, //==================================
                 elevation: 2.0,
-                fillColor: Color(0xFF205375),
-                child: Icon(
+                fillColor: const Color(0xFF205375),
+                padding: const EdgeInsets.all(15.0),
+                shape: const CircleBorder(
+                    side: BorderSide(color: Color(0xFFEFEFEF), width: 1.5)),
+                child: const Icon(
                   Icons.gps_fixed,
                   size: 35.0,
                   color: Color(0xFFEFEFEF),
                 ),
-                padding: EdgeInsets.all(15.0),
-                shape: CircleBorder(
-                    side: BorderSide(color: Color(0xFFEFEFEF), width: 1.5)),
               ),
               RawMaterialButton(
                 onPressed: () {}, //===================================
                 elevation: 2.0,
-                fillColor: Color(0xFF205375),
-                child: Icon(
+                fillColor: const Color(0xFF205375),
+                padding: const EdgeInsets.all(15.0),
+                shape: const CircleBorder(
+                    side: BorderSide(color: Color(0xFFEFEFEF), width: 1.5)),
+                child: const Icon(
                   Icons.question_mark,
                   size: 35.0,
                   color: Color(0xFFEFEFEF),
                 ),
-                padding: EdgeInsets.all(15.0),
-                shape: CircleBorder(
-                    side: BorderSide(color: Color(0xFFEFEFEF), width: 1.5)),
               ),
               RawMaterialButton(
                 onPressed: () {}, //======================================
                 elevation: 2.0,
-                fillColor: Color(0xFF205375),
-                child: Icon(
+                fillColor: const Color(0xFF205375),
+                padding: const EdgeInsets.all(15.0),
+                shape: const CircleBorder(
+                    side: BorderSide(color: Color(0xFFEFEFEF), width: 1.5)),
+                child: const Icon(
                   Icons.refresh_sharp,
                   size: 35.0,
                   color: Color(0xFFEFEFEF),
                 ),
-                padding: EdgeInsets.all(15.0),
-                shape: CircleBorder(
-                    side: BorderSide(color: Color(0xFFEFEFEF), width: 1.5)),
               ),
             ],
           ),
