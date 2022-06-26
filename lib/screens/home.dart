@@ -17,12 +17,21 @@ class Home extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              elevatedCircleButton(
-                  Icons.gps_fixed, AppColors.col2, AppColors.col1, () => {}),
-              elevatedCircleButton(
-                  Icons.add, AppColors.col2, AppColors.col1, () => {}),
-              elevatedCircleButton(
-                  Icons.sync, AppColors.col2, AppColors.col1, () => {}),
+              ElevatedCircleButton(
+                  icon: Icons.gps_fixed,
+                  backgroundColor: AppColors.col2,
+                  borderColor: AppColors.col1,
+                  onPressed: () => {}),
+              ElevatedCircleButton(
+                  icon: Icons.add,
+                  backgroundColor: AppColors.col2,
+                  borderColor: AppColors.col1,
+                  onPressed: () => {}),
+              ElevatedCircleButton(
+                  icon: Icons.sync,
+                  backgroundColor: AppColors.col2,
+                  borderColor: AppColors.col1,
+                  onPressed: () => {}),
             ],
           ),
         ),
