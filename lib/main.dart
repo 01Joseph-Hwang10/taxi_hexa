@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 import 'package:taxi_hexa/screens/home.dart';
 import 'package:taxi_hexa/screens/login.dart';
 
@@ -13,15 +12,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       title: 'Taxi HeXA',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      getPages: [
-        GetPage(name: '/', page: () => const Home()),
-        GetPage(name: '/login', page: () => const Login()),
-      ],
+      routes: {
+        '/': (context) => const Home(),
+        '/login': (context) => const Login(),
+      },
+      initialRoute: '/',
     );
   }
 }
