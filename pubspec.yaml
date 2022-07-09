@@ -42,6 +42,7 @@ dependencies:
   google_maps_flutter: ^2.1.5
   get: ^4.6.3
   json_annotation: ^4.5.0
+  google_sign_in: ^4.5.9
 
 dev_dependencies:
   flutter_test:

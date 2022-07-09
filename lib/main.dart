@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:taxi_hexa/screens/home.dart';
 import 'package:taxi_hexa/screens/login.dart';
+//import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  //WidgetsFlutterBinding.ensureInitialized();
+  //Firebase.initializeApp();
   runApp(const MyApp());
 }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taxi_hexa/screens/login.dart';
 import 'package:taxi_hexa/themes/colors.dart';
 import 'package:taxi_hexa/widgets/common/elevated_circle_button.dart';
 
@@ -9,6 +10,24 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black, //-----------------------removable
+      body: Center(
+        child: Column(
+          children: [
+            ElevatedCircleButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Login(),
+                    ));
+              },
+              icon: Icons.person,
+              backgroundColor: AppColors.col2,
+              borderColor: AppColors.col1,
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomAppBar(
         elevation: 0,
         color: const Color.fromARGB(0, 0, 0, 0),
