@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:taxi_hexa/screens/home.dart';
 import 'package:taxi_hexa/screens/login.dart';
-//import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  //WidgetsFlutterBinding.ensureInitialized();
-  //Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       getPages: [
         GetPage(name: '/', page: () => const Home()),
-        GetPage(name: '/login', page: () => const Login()),
+        GetPage(name: '/login', page: () => Login()),
       ],
     );
   }
