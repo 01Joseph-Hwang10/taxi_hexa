@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
+//import 'package:get/get.dart';
 import 'package:taxi_hexa/widgets/common/elevated_circle_button.dart';
 import 'package:taxi_hexa/themes/colors.dart';
 
@@ -55,17 +55,7 @@ class _LoginState extends State<Login> {
               },
             ),
             TextButton(
-              onPressed: () async {
-                try {
-                  final newUser = await _auth.signInWithEmailAndPassword(
-                      email: loginUserEmail, password: loginUserPw);
-                  if (newUser.user != null) {
-                    Navigator.maybePop(context);
-                  }
-                } catch (e) {
-                  print(e);
-                }
-              },
+              onPressed: ()=>_login(),
               child: const Text('login btn'),
             ),
             SizedBox(
@@ -95,22 +85,33 @@ class _LoginState extends State<Login> {
               },
             ),
             TextButton(
-              onPressed: () async {
-                try {
-                  final newUser = await _auth.createUserWithEmailAndPassword(
-                      email: userEmail, password: userPw);
-                  if (newUser.user != null) {
-                    Navigator.maybePop(context);
-                  }
-                } catch (e) {
-                  print(e);
-                }
-              },
+              onPressed: ()=>_signup(),
               child: const Text('signup btn'),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _login() async {
+    try {
+      final newUser = await _auth.signInWithEmailAndPassword(
+          email: loginUserEmail, password: loginUserPw);
+      if (newUser.user != null) {
+        Navigator.maybePop(context);
+      }
+    } catch (e) {}
+  }
+
+  void _signup() async {
+    try {
+      final newUser = await _auth.createUserWithEmailAndPassword(
+          email: userEmail, password: userPw);
+      if (newUser.user != null) {
+        Navigator.maybePop(context);
+      }
+    } catch (e) {
+    }
   }
 }
