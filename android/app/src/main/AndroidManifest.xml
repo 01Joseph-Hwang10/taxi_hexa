@@ -24,7 +24,7 @@ const WEATHER_API = config.apikey;
               />
 
             <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="apikey.js"/>     <!-- // my api key                              // 추가 -->
+               android:value="${API_KEY}"/>     <!-- // my api key                              // 추가 -->
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

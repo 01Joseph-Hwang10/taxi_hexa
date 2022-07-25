@@ -45,6 +45,5 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-
-# api key
-.apikey.js
+# google map api key
+.env
