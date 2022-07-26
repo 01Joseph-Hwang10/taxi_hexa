@@ -29,7 +29,9 @@ class _HomeState extends State<Home> {
           loggedUser = uuser;
         });
       }
-    } catch (e) {}
+    } catch (e) {
+      /// TODO: Handle error
+    }
   }
 
   @override
@@ -41,18 +43,18 @@ class _HomeState extends State<Home> {
     );
   }
 
-  void openLoginPage() {
+  void openLoginPage() async {
     // 로그인 창 띄우는 버튼
     // 로그인 된 상태일 땐 로그아웃 버튼으로 변함(else문 내용)
     // 이를 원치 않을 땐 나중에 수정하기.
     if (loggedUser == null) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Login(),
-          )).then((_) {
-        getUser();
-      });
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Login(),
+        ),
+      );
+      getUser();
     } else {
       _auth.signOut();
       setState(() {
