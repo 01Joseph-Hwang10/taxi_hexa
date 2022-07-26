@@ -9,34 +9,33 @@ class BottomButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      elevation: 0,
-      color: const Color.fromARGB(0, 0, 0, 0),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 23, 0, 23),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedCircleButton(
-              icon: Icons.gps_fixed,
-              backgroundColor: AppColors.col2,
-              borderColor: AppColors.col1,
-              onPressed: () => {},
-            ),
-            ElevatedCircleButton(
-              icon: Icons.add,
-              backgroundColor: AppColors.col2,
-              borderColor: AppColors.col1,
-              onPressed: () => {},
-            ),
-            ElevatedCircleButton(
-              icon: Icons.sync,
-              backgroundColor: AppColors.col2,
-              borderColor: AppColors.col1,
-              onPressed: () => {},
-            ),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 23, 0, 23),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          ElevatedCircleButton(
+            icon: Icons.gps_fixed,
+            backgroundColor: AppColors.col2,
+            borderColor: AppColors.col1,
+            onPressed: () => {},
+          ),
+          const SizedBox(width: 5),
+          ElevatedCircleButton(
+            icon: Icons.add,
+            backgroundColor: AppColors.col2,
+            borderColor: AppColors.col1,
+            onPressed: () => {},
+          ),
+          const SizedBox(width: 5),
+          ElevatedCircleButton(
+            icon: Icons.sync,
+            backgroundColor: AppColors.col2,
+            borderColor: AppColors.col1,
+            onPressed: () => {},
+          ),
+        ],
       ),
     );
   }

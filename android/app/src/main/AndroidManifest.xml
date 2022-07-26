@@ -2,10 +2,9 @@
     package="com.example.taxi_hexa">
    <application
         android:label="taxi_hexa"
-        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-                android:value="${GOOGLE_MAPS_API_KEY}" />
+                android:value="${googleMapsApiKey}" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

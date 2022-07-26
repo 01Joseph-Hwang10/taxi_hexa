@@ -1,41 +1,17 @@
-// import 'package:flutter/material.dart';
-
-// class TaxiMap extends StatefulWidget {
-//   const TaxiMap({Key? key}) : super(key: key);
-
-//   @override
-//   State<TaxiMap> createState() => _TaxiMapState();
-// }
-
-// class _TaxiMapState extends State<TaxiMap> {
-//   @override
-//   Widget build(BuildContext context) {
-    
-//   }
-// }
-
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
-
-// class TaxiMap extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Flutter Google Maps Demo',
-//       home: MapSample(),
-//     );
-//   }
-// }
-
-class MapSample extends StatefulWidget {
+class TaxiMap extends StatefulWidget {
+  const TaxiMap({Key? key}) : super(key: key);
   @override
-  State<MapSample> createState() => MapSampleState();
+  State<TaxiMap> createState() => _TaxiMapState();
 }
 
-class MapSampleState extends State<MapSample> {
+/// See: https://medium.com/swlh/switch-to-dark-mode-in-real-time-with-flutter-and-google-maps-f0f080cd72e9
+/// TODO: Implement UI by color theme (light/dark)
+class _TaxiMapState extends State<TaxiMap> with WidgetsBindingObserver {
   final Completer<GoogleMapController> _controller = Completer();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
@@ -43,25 +19,55 @@ class MapSampleState extends State<MapSample> {
     zoom: 14.4746,
   );
 
-  // static final CameraPosition _kLake = CameraPosition(
-  //     bearing: 192.8334901395799,
-  //     target: LatLng(37.43296265331129, -122.08832357078792),
-  //     tilt: 59.440717697143555,
-  //     zoom: 19.151926040649414);
-
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      );
+      mapType: MapType.normal,
+      initialCameraPosition: _kGooglePlex,
+      onMapCreated: (GoogleMapController controller) async {
+        _controller.complete(controller);
+        final bindedController = await _controller.future;
+        final mapStyle = await rootBundle.loadString('assets/map/dark.json');
+        await bindedController.setMapStyle(mapStyle);
+      },
+    );
   }
 
-  // Future<void> _goToTheLake() async {
-  //   final GoogleMapController controller = await _controller.future;
-  //   controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  // }
+  String? _darkMapStyle;
+  String? _lightMapStyle;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _loadMapStyles();
+  }
+
+  @override
+  void didChangePlatformBrightness() {
+    setState(() {
+      _setMapStyle();
+    });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  Future _setMapStyle() async {
+    final controller = await _controller.future;
+    final theme = WidgetsBinding.instance.window.platformBrightness;
+    if (theme == Brightness.dark) {
+      controller.setMapStyle(_darkMapStyle);
+    } else {
+      controller.setMapStyle(_lightMapStyle);
+    }
+  }
+
+  Future _loadMapStyles() async {
+    _darkMapStyle = await rootBundle.loadString('assets/map/dark.json');
+    _lightMapStyle = await rootBundle.loadString('assets/map/light.json');
+  }
 }

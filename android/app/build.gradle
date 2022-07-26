@@ -21,12 +21,17 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+// See: https://appunite.com/blog/how-to-securely-use-google-maps-api-key-in-android-i-os-or-flutter-project
+def googleMapsApiKey = localProperties.getProperty('googleMapsApiKey')
+if (googleMapsApiKey == null) {
+   googleMapsApiKey = System.getenv("GOOGLE_MAPS_API_KEY")
+}
+
 apply plugin: 'com.android.application'
 // START: FlutterFire Configuration
 apply plugin: 'com.google.gms.google-services'
 // END: FlutterFire Configuration
 apply plugin: 'kotlin-android'
-apply plugin: 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
@@ -53,6 +58,9 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
+        manifestPlaceholders = [
+            googleMapsApiKey: googleMapsApiKey
+        ]
     }
 
     buildTypes {

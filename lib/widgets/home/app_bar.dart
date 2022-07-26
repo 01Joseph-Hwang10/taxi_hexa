@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 
-/// [AppBar]가 [PreferredSizeWidget]을 상속받아야해
-/// [AppBar]에 한해서는 아래와 같은 위젯 implementation이 필요함.
-class CustomAppBar extends AppBar {
-  CustomAppBar({Key? key})
-      : super(
-          key: key,
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          elevation: 0.0,
-          leading: IconButton(
+class CustomAppBar extends StatelessWidget {
+  const CustomAppBar({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          IconButton(
             icon: const Icon(Icons.menu),
+            color: Colors.white,
+            iconSize: 30,
             onPressed: () {},
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.account_circle),
-              onPressed: () {},
-            ),
-          ],
-        );
+          IconButton(
+            icon: const Icon(Icons.account_circle),
+            color: Colors.white,
+            iconSize: 30,
+            onPressed: () {},
+          ),
+        ],
+      ),
+    );
+  }
 }
