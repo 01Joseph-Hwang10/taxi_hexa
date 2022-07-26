@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:get/get.dart';
-import 'package:taxi_hexa/widgets/common/elevated_circle_button.dart';
-import 'package:taxi_hexa/themes/colors.dart';
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
@@ -55,7 +52,7 @@ class _LoginState extends State<Login> {
               },
             ),
             TextButton(
-              onPressed: ()=>_login(),
+              onPressed: () => _login(),
               child: const Text('login btn'),
             ),
             SizedBox(
@@ -85,7 +82,7 @@ class _LoginState extends State<Login> {
               },
             ),
             TextButton(
-              onPressed: ()=>_signup(),
+              onPressed: () => _signup(),
               child: const Text('signup btn'),
             ),
           ],
@@ -111,7 +108,6 @@ class _LoginState extends State<Login> {
       if (newUser.user != null) {
         Navigator.maybePop(context);
       }
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 }

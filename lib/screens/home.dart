@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:taxi_hexa/screens/login.dart';
-import 'package:taxi_hexa/themes/colors.dart';
-import 'package:taxi_hexa/widgets/common/elevated_circle_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:taxi_hexa/widgets/home/app_bar.dart';
 import 'package:taxi_hexa/widgets/home/bottom_buttons.dart';
@@ -19,7 +17,6 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    print('init');
     super.initState();
     getUser();
   }
@@ -31,14 +28,8 @@ class _HomeState extends State<Home> {
         setState(() {
           loggedUser = uuser;
         });
-        print(loggedUser!.email);
-        print('a');
-      } else {
-        print('null');
       }
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   @override
@@ -48,5 +39,25 @@ class _HomeState extends State<Home> {
       appBar: CustomAppBar(),
       bottomNavigationBar: const BottomButtons(),
     );
+  }
+
+  void openLoginPage() {
+    // 로그인 창 띄우는 버튼
+    // 로그인 된 상태일 땐 로그아웃 버튼으로 변함(else문 내용)
+    // 이를 원치 않을 땐 나중에 수정하기.
+    if (loggedUser == null) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Login(),
+          )).then((_) {
+        getUser();
+      });
+    } else {
+      _auth.signOut();
+      setState(() {
+        loggedUser = null;
+      });
+    }
   }
 }
