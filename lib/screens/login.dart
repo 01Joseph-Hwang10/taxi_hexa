@@ -55,7 +55,7 @@ class _LoginState extends State<Login> {
               onPressed: () => _login(),
               child: const Text('login btn'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Text('sign up'),

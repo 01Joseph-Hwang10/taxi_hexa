@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taxi_hexa/themes/colors.dart';
 import 'package:taxi_hexa/widgets/common/elevated_circle_button.dart';
+import 'package:taxi_hexa/widgets/home/add.dart';
 
 class BottomButtons extends StatelessWidget {
   const BottomButtons({
@@ -26,7 +27,16 @@ class BottomButtons extends StatelessWidget {
             icon: Icons.add,
             backgroundColor: AppColors.col2,
             borderColor: AppColors.col1,
-            onPressed: () => {},
+            onPressed: () {
+              showModalBottomSheet<void>(
+                  context: context,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  builder: (BuildContext context) {
+                    return AddParty();
+                  });
+            },
           ),
           const SizedBox(width: 5),
           ElevatedCircleButton(

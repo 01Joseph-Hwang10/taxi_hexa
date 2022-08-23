@@ -15,7 +15,7 @@ class _TaxiMapState extends State<TaxiMap> with WidgetsBindingObserver {
   final Completer<GoogleMapController> _controller = Completer();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
+    target: LatLng(35.57678893974687, 129.1876580155182),
     zoom: 14.4746,
   );
 
