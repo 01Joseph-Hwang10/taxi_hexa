@@ -4,6 +4,22 @@
 
 ## Getting Started
 
+### Firebase settings
+
+본 앱에서는 flutterfire 패키지를 사용하고, firebase 사용을 위해 안드로이드와 iOS에 각각 설정을 해줘야합니다.
+
+#### Android
+
+아래 도큐멘테이션을 참조해주세요.
+
+<https://firebase.flutter.dev/docs/manual-installation/android>
+
+#### iOS
+
+아래 도큐멘테이션을 참조해주세요.
+
+<https://firebase.flutter.dev/docs/manual-installation/ios>
+
 ### Google maps API key setting
 
 본 앱에서는 google_maps_flutter 패키지를 사용하는데, public으로의 API Key 유출을 막기 위해 environment variable을 통해 google maps에 api key를 provide 해줍니다.

@@ -48,7 +48,7 @@ dependencies:
   flutter_datetime_picker: ^1.5.1
   uuid: 3.0.6
   geocoding: ^2.0.5
-  address_search_field: ^5.0.3
+  google_place:
   geolocator: ^9.0.1
 
 dev_dependencies:
@@ -79,6 +79,7 @@ flutter:
   assets:
     - assets/
     - assets/map/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

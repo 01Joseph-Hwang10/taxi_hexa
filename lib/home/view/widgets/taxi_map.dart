@@ -26,6 +26,7 @@ class _TaxiMapState extends State<TaxiMap> with WidgetsBindingObserver {
       mapType: MapType.normal,
       initialCameraPosition: initialCameraPosition,
       markers: state.markers,
+      myLocationButtonEnabled: false,
       onMapCreated: (GoogleMapController controller) async {
         final _controller = Completer<GoogleMapController>();
         _controller.complete(controller);

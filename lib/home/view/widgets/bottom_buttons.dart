@@ -122,17 +122,18 @@ class _CurrentLocationButton extends StatelessWidget {
           position.latitude,
           position.longitude,
         );
+        final icon = await BitmapDescriptor.fromAssetImage(
+          const ImageConfiguration(size: Size(10, 10)),
+          'assets/icons/bx_current-location.png',
+        );
         bloc.add(
           AddMarker(
             marker: Marker(
               markerId: MarkerId(
-                const Uuid().v1(),
+                target.toString(),
               ),
               position: target,
-              icon: await BitmapDescriptor.fromAssetImage(
-                ImageConfiguration.empty,
-                'assets/icons/bx_current-location.png',
-              ),
+              icon: icon,
             ),
           ),
         );
@@ -141,7 +142,7 @@ class _CurrentLocationButton extends StatelessWidget {
           CameraUpdate.newCameraPosition(
             CameraPosition(
               target: target,
-              zoom: 14,
+              zoom: 16,
             ),
           ),
         );

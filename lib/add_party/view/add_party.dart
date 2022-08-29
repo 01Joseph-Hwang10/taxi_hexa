@@ -37,14 +37,15 @@ class _AddPartyState extends State<AddParty> {
           topRight: Radius.circular(20),
         ),
       ),
-      child: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: Container(
                 margin: const EdgeInsets.all(12),
-                height: 20,
+                height: 10,
                 width: 100,
                 decoration: const BoxDecoration(
                   color: AppColors.col3,
@@ -54,22 +55,17 @@ class _AddPartyState extends State<AddParty> {
                 ),
               ),
             ),
-            Row(
-              children: const [
-                SizedBox(width: 20),
-                Text(
-                  "택시팟 생성",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+            const SizedBox(height: 5),
+            const Text(
+              "택시팟 생성",
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             TextFormField(
-              initialValue: name,
-              decoration: buildInputDecoration('name'),
+              decoration: buildInputDecoration('팟 이름'),
               controller: nameTextController,
             ),
             Text(
@@ -90,11 +86,12 @@ class _AddPartyState extends State<AddParty> {
                   },
                 );
               },
-              child: Text("출발 시간: ${departure.toString()}"),
+              child: Text(
+                "출발 시간: ${departure?.hour}시 ${departure?.minute}분",
+              ),
             ),
             TextFormField(
-              initialValue: description,
-              decoration: buildInputDecoration('description'),
+              decoration: buildInputDecoration('팟 설명'),
               controller: descriptionTextController,
             ),
             ElevatedButton(
