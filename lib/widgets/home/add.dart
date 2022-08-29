@@ -8,7 +8,7 @@ import 'package:uuid/uuid.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:address_search_field/address_search_field.dart';
 
-var uuid = const Uuid();
+var _uuid = const Uuid();
 LatLng current_LatLng = new LatLng(1.10, 45.50);
 LatLng dest_LatLng = new LatLng(37.498326, 126.998452);
 
@@ -113,7 +113,7 @@ class _AddPartyState extends State<AddParty> {
               onPressed:
                   (name != '' && destinationAddress != '' && departure != null)
                       ? () async {
-                          String the_uuid = uuid.v1();
+                          String the_uuid = _uuid.v1();
                           DatabaseReference ref = FirebaseDatabase.instance
                               .ref("taxi_party" + the_uuid.toString());
                           await ref.set(TaxiPartyModel(

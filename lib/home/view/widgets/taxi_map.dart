@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taxi_hexa/location/location.dart';
 import 'package:taxi_hexa/utils/constants.dart';
-import 'package:taxi_hexa/widgets/home/my_location/bloc/my_location_bloc.dart';
 
 class TaxiMap extends StatefulWidget {
   const TaxiMap({Key? key}) : super(key: key);

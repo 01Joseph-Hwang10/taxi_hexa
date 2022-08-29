@@ -4,23 +4,23 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-part 'my_location_event.dart';
-part 'my_location_state.dart';
+part 'location_event.dart';
+part 'location_state.dart';
 
-class MyLocationBloc extends Bloc<MyLocationEvent, MyLocationState> {
+class LocationBloc extends Bloc<LocationEvent, LocationState> {
   /// {@macro start_game_bloc}
-  MyLocationBloc() : super(MyLocationState.initial()) {
+  LocationBloc() : super(LocationState.initial()) {
     on<MapLoaded>(_onMapLoaded);
     on<AddMarker>(_onAddMarker);
   }
 
   void _onMapLoaded(
     MapLoaded event,
-    Emitter<MyLocationState> emit,
+    Emitter<LocationState> emit,
   ) async {
     emit(
       state.copyWith(
-        status: MyLocationStatus.loaded,
+        status: LocationStatus.loaded,
         controller: event.controller,
       ),
     );
@@ -28,16 +28,13 @@ class MyLocationBloc extends Bloc<MyLocationEvent, MyLocationState> {
 
   void _onAddMarker(
     AddMarker event,
-    Emitter<MyLocationState> emit,
+    Emitter<LocationState> emit,
   ) {
     final _markers = Set<Marker>();
     _markers.addAll(state.markers);
     _markers.add(event.marker);
-    emit(
-      state.copyWith(
-        markers: _markers,
-      )
-    );
+    emit(state.copyWith(
+      markers: _markers,
+    ));
   }
-
 }

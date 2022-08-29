@@ -5,10 +5,11 @@ abstract class LoginEvent extends Equatable {
 }
 
 class LoggedIn extends LoginEvent {
-  const LoggedIn();
+  final UserModel? userInfo;
+  const LoggedIn(this.userInfo);
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [userInfo];
 }
 
 class LoggedOut extends LoginEvent {
@@ -19,7 +20,7 @@ class LoggedOut extends LoginEvent {
 }
 
 class UpdateUserInfo extends LoginEvent {
-  final String userInfo;
+  final UserModel userInfo;
 
   const UpdateUserInfo(this.userInfo);
 

@@ -3,10 +3,10 @@ import 'package:taxi_hexa/themes/colors.dart';
 import 'package:taxi_hexa/widgets/common/elevated_circle_button.dart';
 import 'package:taxi_hexa/widgets/home/add.dart';
 
-// class BottomButtons extends StatelessWidget {
-//   const BottomButtons({
-//     Key? key,
-//   }) : super(key: key);
+class BottomButtons extends StatelessWidget {
+  const BottomButtons({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +29,12 @@ import 'package:taxi_hexa/widgets/home/add.dart';
             borderColor: AppColors.col1,
             onPressed: () {
               showModalBottomSheet<void>(
-                  context: context,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  builder: (BuildContext context) {
-                    return AddParty();
-                  });
+                context: context,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                builder: (_) => AddParty(),
+              );
             },
           ),
           const SizedBox(width: 5),

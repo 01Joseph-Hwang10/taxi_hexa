@@ -1,10 +1,10 @@
-part of 'my_location_bloc.dart';
+part of 'location_bloc.dart';
 
-abstract class MyLocationEvent extends Equatable {
-  const MyLocationEvent();
+abstract class LocationEvent extends Equatable {
+  const LocationEvent();
 }
 
-class MapLoaded extends MyLocationEvent {
+class MapLoaded extends LocationEvent {
   final Completer<GoogleMapController> controller;
   const MapLoaded({required this.controller});
 
@@ -12,7 +12,7 @@ class MapLoaded extends MyLocationEvent {
   List<Object> get props => [controller];
 }
 
-class AddMarker extends MyLocationEvent {
+class AddMarker extends LocationEvent {
   final Marker marker;
   const AddMarker({required this.marker});
 

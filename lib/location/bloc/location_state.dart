@@ -1,6 +1,6 @@
-part of 'my_location_bloc.dart';
+part of 'location_bloc.dart';
 
-enum MyLocationStatus {
+enum LocationStatus {
   /// Initial status.
   initial,
 
@@ -8,31 +8,36 @@ enum MyLocationStatus {
   loaded,
 }
 
-class MyLocationState extends Equatable {
-  MyLocationState({
+class LocationState extends Equatable {
+  const LocationState({
     required this.status,
     required this.markers,
     required this.controller,
   });
 
-  /// Initial [MyLocationState].
-  MyLocationState.initial() : this(status: MyLocationStatus.initial, controller: Completer(), markers: Set(),);
+  /// Initial [LocationState].
+  LocationState.initial()
+      : this(
+          status: LocationStatus.initial,
+          controller: Completer(),
+          markers: <Marker>{},
+        );
 
-  /// Status of [MyLocationState].
-  final MyLocationStatus status;
+  /// Status of [LocationState].
+  final LocationStatus status;
 
   final Completer<GoogleMapController> controller;
 
   // ignore: prefer_collection_literals
   final Set<Marker> markers;
 
-  /// Creates a copy of [MyLocationState].
-  MyLocationState copyWith({
-    MyLocationStatus? status,
+  /// Creates a copy of [LocationState].
+  LocationState copyWith({
+    LocationStatus? status,
     Completer<GoogleMapController>? controller,
     Set<Marker>? markers,
   }) {
-    return MyLocationState(
+    return LocationState(
       status: status ?? this.status,
       controller: controller ?? this.controller,
       markers: markers ?? this.markers,
