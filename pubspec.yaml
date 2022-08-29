@@ -46,6 +46,9 @@ dependencies:
   json_annotation: ^4.5.0
   google_sign_in: ^4.5.9
   flutter_datetime_picker: ^1.5.1
+  uuid: 3.0.6
+  geocoding: ^2.0.5
+  address_search_field: ^5.0.3
 
 dev_dependencies:
   flutter_test:
