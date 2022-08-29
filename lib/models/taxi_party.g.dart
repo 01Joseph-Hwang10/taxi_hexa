@@ -26,7 +26,7 @@ Map<String, dynamic> _$TaxiPartyModelToJson(TaxiPartyModel instance) =>
       'name': instance.name,
       'destination_address': instance.destinationAddress,
       'members': instance.members,
-      'departure': instance.departure.toIso8601String(),
+      'departure': TaxiPartyModel.dateTimeToJson(instance.departure),
       'description': instance.description,
       'destination': TaxiPartyModel.latLngToJson(instance.destination),
       'current_position': TaxiPartyModel.latLngToJson(instance.currentPosition),

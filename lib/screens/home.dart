@@ -43,6 +43,7 @@ class _HomeState extends State<Home> {
       body: MainScreen(),
     );
   }
+
   void openLoginPage() async {
     // 로그인 창 띄우는 버튼
     // 로그인 된 상태일 땐 로그아웃 버튼으로 변함(else문 내용)
@@ -84,25 +85,5 @@ class MainScreen extends StatelessWidget {
         )
       ],
     );
-  }
-
-  void openLoginPage() async {
-    // 로그인 창 띄우는 버튼
-    // 로그인 된 상태일 땐 로그아웃 버튼으로 변함(else문 내용)
-    // 이를 원치 않을 땐 나중에 수정하기.
-    if (loggedUser == null) {
-      await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Login(),
-        ),
-      );
-      getUser();
-    } else {
-      _auth.signOut();
-      setState(() {
-        loggedUser = null;
-      });
-    }
   }
 }

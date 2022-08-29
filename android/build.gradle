@@ -10,7 +10,7 @@ buildscript {
         // START: FlutterFire Configuration
         classpath 'com.google.gms:google-services:4.3.10'
         // END: FlutterFire Configuration
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30"//$kotlin_version: Kotlin version that is used for building with Gradle (1.6.10) differs from the one bundled into the IDE plugin (1.5.30)
     }
 }
 

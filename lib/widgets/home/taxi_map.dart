@@ -15,8 +15,8 @@ class TaxiMap extends StatefulWidget {
 /// See: https://medium.com/swlh/switch-to-dark-mode-in-real-time-with-flutter-and-google-maps-f0f080cd72e9
 /// TODO: Implement UI by color theme (light/dark)
 class _TaxiMapState extends State<TaxiMap> with WidgetsBindingObserver {
-
-  CameraPosition initialCameraPosition = const CameraPosition(target: unistDormitory, zoom: 14.4746);
+  CameraPosition initialCameraPosition =
+      const CameraPosition(target: unistDormitory, zoom: 14.4746);
 
   @override
   Widget build(BuildContext context) {
