@@ -9,15 +9,15 @@ class LoginState extends Equatable {
   const LoginState.initial()
       : this(
           isLoggedIn: false,
-          userInfo: "",
+          userInfo: null,
         );
 
   final bool isLoggedIn;
-  final Object userInfo;
+  final UserModel? userInfo;
 
   LoginState copyWith({
     bool? isLoggedIn,
-    Object? userInfo,
+    UserModel? userInfo,
   }) {
     return LoginState(
       isLoggedIn: isLoggedIn ?? this.isLoggedIn,
@@ -26,5 +26,5 @@ class LoginState extends Equatable {
   }
 
   @override
-  List<Object> get props => [isLoggedIn, userInfo];
+  List<Object?> get props => [isLoggedIn, userInfo];
 }

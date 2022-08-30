@@ -7,30 +7,36 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taxi_hexa/login/login.dart';
 import 'package:taxi_hexa/login/models/user.dart';
 
-class SignIn extends AbstractForm {
-  SignIn({
+/// I misspelled this class name. It's 'SignUp' not 'SignIn'.
+class SignUp extends AbstractForm {
+  SignUp({
     Key? key,
   }) : super(key: key);
 
-  final _auth = FirebaseAuth.instance;
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: Center(
-        child: buildForm(
-          context,
-          title: 'Sign In',
-          onSubmit: () => _signin(context),
+      body: SafeArea(
+        child: Center(
+          child: buildFormContainer(
+            context,
+            children: buildFormElements(
+              context,
+              title: 'Sign Up',
+              onSubmit: () => signup(context),
+            ),
+          ),
         ),
       ),
     );
   }
 
-  void _signin(BuildContext context) async {
+  void signup(BuildContext context) async {
     try {
-      final newUser = await _auth.createUserWithEmailAndPassword(
+      final newUser = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );

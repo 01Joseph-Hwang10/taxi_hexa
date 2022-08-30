@@ -4,26 +4,23 @@ class AbsoluteAlign extends StatelessWidget {
   const AbsoluteAlign({
     Key? key,
     Alignment? alignment,
+    bool? safearea,
     required this.child,
     this.width,
     this.height,
   })  : alignment = alignment ?? Alignment.topLeft,
+        safearea = safearea ?? false,
         super(key: key);
 
   final Alignment alignment;
   final Widget child;
   final double? width;
   final double? height;
+  final bool safearea;
 
   @override
   Widget build(BuildContext context) {
-    final position = AbsoluteAlignPosition(
-      context: context,
-      alignment: alignment,
-      horizontalMovement: 0,
-      verticalMovement: 0,
-      isActive: false,
-    );
+    final position = calculatePosition(context);
     return Positioned(
       top: position.top,
       left: position.left,
@@ -31,8 +28,29 @@ class AbsoluteAlign extends StatelessWidget {
       right: position.right,
       width: width,
       height: height,
-      child: child,
+      child: buildInner(context),
     );
+  }
+
+  Widget buildInner(BuildContext context) {
+    if (safearea) {
+      return SafeArea(
+        child: child,
+      );
+    } else {
+      return child;
+    }
+  }
+
+  AbsoluteAlignPosition calculatePosition(BuildContext context) {
+    final position = AbsoluteAlignPosition(
+      context: context,
+      alignment: alignment,
+      horizontalMovement: 0,
+      verticalMovement: 0,
+      isActive: false,
+    );
+    return position;
   }
 }
 

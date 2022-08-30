@@ -67,3 +67,16 @@ flutter emulators # 에뮬레이터의 리스트를 반환합니다
 flutter emulators --launch <emulator-id> # 에뮬레이터를 실행합니다
 flutter run # 에뮬레이터에 앱을 설치하고 실행합니다
 ```
+
+### json_serializable
+
+외부 API와 통신하여 받아오는 json들은 json_serializable 패키지를 사용하여 객체화합니다.
+
+위 패키지의 사용은 [공식 문서](https://pub.dev/packages/json_serializable)를 참조해주세요.
+
+위 패키지로 직렬화 모듈들을 만들었다면, 아래 코드를 사용해 나머지 [code generation task](https://pub.dev/packages/json_serializable#running-the-code-generator)를 완료하십시오.
+
+```bash
+dart run build_runner build
+flutter pub run build_runner build
+```

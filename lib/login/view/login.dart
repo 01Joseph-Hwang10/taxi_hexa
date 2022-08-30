@@ -12,25 +12,35 @@ class Login extends AbstractForm {
     Key? key,
   }) : super(key: key);
 
-  final _auth = FirebaseAuth.instance;
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
+    final formElements = buildFormElements(
+      context,
+      title: 'Login',
+      onSubmit: () => login(context),
+    );
+    formElements.addAll(
+      [
+        const SizedBox(height: 10),
+        const _GotoSignUp(),
+      ],
+    );
     return Scaffold(
       appBar: buildAppBar(),
       body: Center(
-        child: buildForm(
+        child: buildFormContainer(
           context,
-          title: 'Login',
-          onSubmit: () => _login(context),
+          children: formElements,
         ),
       ),
     );
   }
 
-  void _login(BuildContext context) async {
+  void login(BuildContext context) async {
     try {
-      final newUser = await _auth.signInWithEmailAndPassword(
+      final newUser = await auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -55,5 +65,30 @@ class Login extends AbstractForm {
         ),
       );
     }
+  }
+}
+
+class _GotoSignUp extends StatelessWidget {
+  const _GotoSignUp({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const Text('Have no account?'),
+        TextButton(
+          onPressed: () => gotoSignUp(context),
+          child: const Text('Sign up'),
+        ),
+      ],
+    );
+  }
+
+  void gotoSignUp(BuildContext context) {
+    Navigator.of(context).pushNamed('/signup');
   }
 }

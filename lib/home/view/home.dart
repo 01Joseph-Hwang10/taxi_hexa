@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taxi_hexa/home/components/app_bar/app_bar.dart';
 import 'package:taxi_hexa/home/home.dart';
 
 class Home extends StatelessWidget {
@@ -16,11 +17,13 @@ class Home extends StatelessWidget {
           AbsoluteAlign(
             alignment: Alignment.bottomLeft,
             width: MediaQuery.of(context).size.width,
+            safearea: true,
             child: const BottomButtons(),
           ),
           AbsoluteAlign(
             alignment: Alignment.topLeft,
             width: MediaQuery.of(context).size.width,
+            safearea: true,
             child: const CustomAppBar(),
           )
         ],

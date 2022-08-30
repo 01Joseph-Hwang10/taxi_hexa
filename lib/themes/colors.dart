@@ -5,8 +5,7 @@ class AppColors {
 
   AppColors._(); // this basically makes it so you can't instantiate this class
 
-  // 일단 임시로 해놨습니다. 언제든 더 색깔 저장하는 좋은 방법이 있으면 바꾸죠.
-  static const Color col1 = Color(0xFFEFEFEF);
-  static const Color col2 = Color(0xFF205375);
-  static const Color col3 = Color(0xFF112B3C);
+  static const Color white = Color(0xFFEFEFEF);
+  static const Color blue = Color(0xFF205375);
+  static const Color darkblue = Color(0xFF112B3C);
 }

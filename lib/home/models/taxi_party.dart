@@ -11,7 +11,7 @@ class TaxiPartyModel {
   String id;
   String name;
   String destinationAddress;
-  List<String> members;
+  List<String?> members;
   String? description;
 
   @JsonKey(fromJson: latLngFromJson, toJson: latLngToJson)
@@ -20,7 +20,7 @@ class TaxiPartyModel {
   LatLng? currentPosition;
 
   @JsonKey(fromJson: dateTimeFromJson, toJson: dateTimeToJson)
-  DateTime departure;
+  DateTime? departure;
 
   TaxiPartyModel({
     required this.id,
@@ -50,17 +50,18 @@ class TaxiPartyModel {
         : null;
   }
 
-  static String dateTimeToJson(DateTime? dateTime) =>
-      jsonEncode(dateTime != null
-          ? {
-              'year': dateTime.year,
-              'month': dateTime.month,
-              'day': dateTime.day,
-              'hour': dateTime.hour,
-              'minute': dateTime.minute,
-              'second': dateTime.second
-            }
-          : null);
+  static String dateTimeToJson(DateTime? dateTime) => jsonEncode(
+        dateTime != null
+            ? {
+                'year': dateTime.year,
+                'month': dateTime.month,
+                'day': dateTime.day,
+                'hour': dateTime.hour,
+                'minute': dateTime.minute,
+                'second': dateTime.second
+              }
+            : null,
+      );
 
   static DateTime? dateTimeFromJson(String jsonString) {
     final LinkedHashMap<String, dynamic>? jsonMap = jsonDecode(jsonString);
