@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class Submit extends StatelessWidget {
     bool disabled = false;
     if (addPartyState.name.isEmpty) disabled = true;
     if (addPartyState.departure == null) disabled = true;
-    if (addPartyState.destination == null) disabled = true;
+    //if (addPartyState.destination == null) disabled = true;
     return FullWidthButton(
       "택시팟 만들기",
       onPressed: () async => _onPressed(context),
@@ -35,24 +36,28 @@ class Submit extends StatelessWidget {
     final locationState = context.read<LocationBloc>().state;
     final loginState = context.read<LoginBloc>().state;
     if (addPartyState.name == '') return;
-    if (addPartyState.destination?.description == null) return;
+    //if (addPartyState.destination?.description == null) return;
     if (addPartyState.departure == null) return;
 
     String id = const Uuid().v1();
     DatabaseReference ref = FirebaseDatabase.instance.ref(
       "parties/taxi_party${id.toString()}",
     );
-    LatLng destination = await getDestinationCoordinate(
+    /*LatLng destination = await getDestinationCoordinate(
       context,
       addPartyState.destination!.placeId!,
-    );
+    );*/
     TaxiPartyModel newParty = TaxiPartyModel(
       id: id,
       name: addPartyState.name,
-      destination: destination,
-      destinationAddress: addPartyState.destination!.description!, // 주소
-      currentPosition: locationState.currentLocation,
-      members: <String?>[loginState.userInfo?.id],
+      destination: new LatLng(0, 0), //destination,
+      destinationAddress:
+          "Somewhere Over the Rainbow", //addPartyState.destination!.description!, // 주소
+      currentPosition:
+          new LatLng(35.907757, 127.766922), //locationState.currentLocation,
+      members: (loginState.isLoggedIn)
+          ? <String?>[loginState.userInfo?.id]
+          : <String?>[currentuser!.user!.uid.toString()],
       departure: addPartyState.departure!,
       description: addPartyState.description,
     );
