@@ -36,11 +36,11 @@ class SignUp extends AbstractForm {
 
   void signup(BuildContext context) async {
     try {
-      final newUser = await auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      if (newUser.user == null) throw Exception("User not created");
+      final credential =
+          EmailAuthProvider.credential(email: email, password: password);
+      final newUser = await FirebaseAuth.instance.currentUser
+          ?.linkWithCredential(credential);
+      if (newUser!.user == null) throw Exception("User not created");
       final bloc = context.read<LoginBloc>();
       bloc.add(
         LoggedIn(

@@ -50,7 +50,7 @@ class Submit extends StatelessWidget {
     TaxiPartyModel newParty = TaxiPartyModel(
       id: id,
       name: addPartyState.name,
-      destination: new LatLng(0, 0), //destination,
+      destination: new LatLng(35.90776, 127.7669), //destination,
       destinationAddress:
           "Somewhere Over the Rainbow", //addPartyState.destination!.description!, // 주소
       currentPosition:

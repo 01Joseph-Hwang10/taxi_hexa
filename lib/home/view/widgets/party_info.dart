@@ -4,6 +4,7 @@ import 'package:taxi_hexa/home/models/taxi_party.dart';
 import 'package:taxi_hexa/location/location.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:collection/collection.dart';
+import 'package:taxi_hexa/login/bloc/login_bloc.dart';
 import 'package:taxi_hexa/themes/text_styles.dart';
 
 class PartyInfo extends StatelessWidget {
@@ -19,10 +20,19 @@ class PartyInfo extends StatelessWidget {
       children: [
         const DragBar(),
         const SizedBox(height: 10),
-        Text(
-          party!.name,
-          textAlign: TextAlign.start,
-          style: AppTextStyles.heading,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              party!.name,
+              textAlign: TextAlign.start,
+              style: AppTextStyles.heading,
+            ),
+            (currentuser!.user!.uid.toString() == party.members.first)
+                ? ElevatedButton(onPressed: () {}, child: Text("수정"))
+                : const Text("no"),
+          ],
         ),
         const SizedBox(height: 10),
         _SubHeading(party: party),
