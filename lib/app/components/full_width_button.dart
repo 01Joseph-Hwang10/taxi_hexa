@@ -30,6 +30,7 @@ class FullWidthButton extends StatelessWidget {
       child: Text(
         text,
         style: AppTextStyles.subHeading,
+        textAlign: TextAlign.center,
       ),
     );
   }

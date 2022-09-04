@@ -24,7 +24,7 @@ class AddPartyState extends Equatable {
 
   final TextEditingController nameTextController;
   final TextEditingController descriptionTextController;
-  final AutocompletePrediction? destination;
+  final DetailsResponse? destination;
   final List<Placemark>? destinationPlacemarks;
   final DateTime? departure;
   final GooglePlace? googlePlace;
@@ -35,7 +35,7 @@ class AddPartyState extends Equatable {
   AddPartyState copyWith({
     TextEditingController? nameTextController,
     TextEditingController? descriptionTextController,
-    AutocompletePrediction? destination,
+    DetailsResponse? destination,
     DateTime? departure,
     List<Placemark>? destinationPlacemarks,
     GooglePlace? googlePlace,

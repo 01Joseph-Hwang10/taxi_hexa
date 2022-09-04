@@ -11,7 +11,7 @@ class TaxiPartyModel {
   String id;
   String name;
   String destinationAddress;
-  List<String?> members;
+  List<String> members;
   String? description;
 
   @JsonKey(fromJson: latLngFromJson, toJson: latLngToJson)

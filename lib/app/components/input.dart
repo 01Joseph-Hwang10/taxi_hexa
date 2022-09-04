@@ -1,7 +1,9 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:taxi_hexa/themes/colors.dart';
 
-class CupertinoTextField extends StatelessWidget {
+class CupertinoTextField extends StatefulWidget {
   const CupertinoTextField({
     Key? key,
     bool? dense,
@@ -18,18 +20,34 @@ class CupertinoTextField extends StatelessWidget {
   final bool required;
 
   @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      decoration: buildInputDecoration(fieldName: fieldName),
-      controller: controller,
-    );
+  _CupertinoTextFieldState createState() => _CupertinoTextFieldState();
+}
+
+class _CupertinoTextFieldState extends State<CupertinoTextField> {
+  String? errorText;
+  void setErrorText(String? text) {
+    setState(() {
+      errorText = text;
+    });
   }
 
-  String? get _errorText {
-    if (required && controller.text.isEmpty) {
-      return '필수인 항목입니다.';
-    }
-    return null;
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      decoration: buildInputDecoration(fieldName: widget.fieldName),
+      controller: widget.controller,
+      onChanged: (value) {
+        if (!widget.required) return;
+        if (value.isEmpty && errorText == null) {
+          setErrorText("필수 입력 항목입니다");
+          return;
+        }
+        if (value.isNotEmpty && errorText != null) {
+          setErrorText(null);
+          return;
+        }
+      },
+    );
   }
 
   InputDecoration buildInputDecoration({
@@ -39,7 +57,7 @@ class CupertinoTextField extends StatelessWidget {
       border: const OutlineInputBorder(),
       focusColor: AppColors.blue,
       hintText: fieldName,
-      errorText: _errorText,
+      errorText: errorText,
     );
   }
 }
