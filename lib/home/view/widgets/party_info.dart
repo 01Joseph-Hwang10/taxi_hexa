@@ -10,6 +10,7 @@ import 'package:firebase_database/firebase_database.dart';
 
 class PartyInfo extends StatelessWidget {
   PartyInfo({Key? key}) : super(key: key);
+  bool joinActive = true;
   @override
   Widget build(BuildContext context) {
     final state = context.watch<LocationBloc>().state;
@@ -32,30 +33,34 @@ class PartyInfo extends StatelessWidget {
             (currentuser!.user!.uid.toString() == party.members.first)
                 ? ElevatedButton(onPressed: () {}, child: Text("수정"))
                 : (party.members
-                            .where((element) =>
-                                element == currentuser!.user!.uid.toString())
-                            .length ==
-                        0)
+                        .where((element) =>
+                            element == currentuser!.user!.uid.toString())
+                        .isEmpty)
                     ? ElevatedButton(
-                        onPressed: () {
-                          party.members.add(currentuser!.user!.uid.toString());
-                          FirebaseDatabase.instance.ref().update({
-                            "parties/taxi_party${party.id}/members":
+                        onPressed: (joinActive)
+                            ? () {
                                 party.members
-                          });
-                        },
+                                    .add(currentuser!.user!.uid.toString());
+                                FirebaseDatabase.instance.ref().update({
+                                  "parties/taxi_party${party.id}/members":
+                                      party.members
+                                });
+                                joinActive = false;
+                              }
+                            : null,
                         child: Text("참여"))
                     : ElevatedButton(
-                        onPressed: () {
-                          print(party.members.where((element) =>
-                              element == currentuser!.user!.uid.toString()));
-                          party.members
-                              .remove(currentuser!.user!.uid.toString());
-                          FirebaseDatabase.instance.ref().update({
-                            "parties/taxi_party${party.id}/members":
+                        onPressed: (joinActive)
+                            ? () {
                                 party.members
-                          });
-                        },
+                                    .remove(currentuser!.user!.uid.toString());
+                                FirebaseDatabase.instance.ref().update({
+                                  "parties/taxi_party${party.id}/members":
+                                      party.members
+                                });
+                                joinActive = false;
+                              }
+                            : null,
                         child: Text("탈퇴")),
           ],
         ),
