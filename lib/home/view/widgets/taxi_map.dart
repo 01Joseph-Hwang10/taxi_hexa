@@ -160,7 +160,7 @@ class _TaxiMapState extends State<TaxiMap> with WidgetsBindingObserver {
           );
           showModalBottomSheet(
             context: context,
-            builder: (_) => const PartyInfo(),
+            builder: (_) => PartyInfo(),
           );
         });
     return marker;
