@@ -15,7 +15,7 @@ TaxiPartyModel _$TaxiPartyModelFromJson(Map<String, dynamic> json) =>
       currentPosition:
           TaxiPartyModel.latLngFromJson(json['current_position'] as String),
       members:
-          (json['members'] as List<dynamic>).map((e) => e as String?).toList(),
+          (json['members'] as List<dynamic>).map((e) => e as String).toList(),
       departure: TaxiPartyModel.dateTimeFromJson(json['departure'] as String),
       description: json['description'] as String?,
     );

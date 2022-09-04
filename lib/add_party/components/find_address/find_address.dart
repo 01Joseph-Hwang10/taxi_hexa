@@ -6,6 +6,7 @@ import 'package:taxi_hexa/add_party/bloc/add_party_bloc.dart';
 import 'package:taxi_hexa/add_party/components/find_address/widgets/widgets.dart';
 import 'package:taxi_hexa/app/components/components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taxi_hexa/location/location.dart';
 
 InputDecoration _textFieldDecoration = const InputDecoration(
   labelText: "장소를 검색하세요",
@@ -82,10 +83,20 @@ class _FindAddressState extends State<FindAddress> {
 
   void autoCompleteSearch(BuildContext context, String value) async {
     final googlePlace = context.read<AddPartyBloc>().state.googlePlace;
-    AutocompleteResponse? result = await googlePlace!.autocomplete.get(value);
+    final currentLocation = context.read<LocationBloc>().state.currentLocation;
+    final origin = currentLocation != null
+        ? LatLon(currentLocation.latitude, currentLocation.longitude)
+        : null;
+    AutocompleteResponse? result = await googlePlace!.autocomplete.get(
+      value,
+      origin: origin,
+      radius: 10 * 1000, // 10km
+      region: 'KR',
+      language: 'ko',
+    );
     if (result == null) return;
     if (result.predictions == null) return;
     if (!mounted) return;
-    setPrediections(predictions);
+    setPrediections(result.predictions!);
   }
 }

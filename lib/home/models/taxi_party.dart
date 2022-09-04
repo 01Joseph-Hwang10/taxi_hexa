@@ -11,7 +11,7 @@ class TaxiPartyModel {
   String id;
   String name;
   String destinationAddress;
-  List<String?> members;
+  List<String> members;
   String? description;
 
   @JsonKey(fromJson: latLngFromJson, toJson: latLngToJson)
@@ -25,10 +25,10 @@ class TaxiPartyModel {
   TaxiPartyModel({
     required this.id,
     required this.name,
-    required this.destination,
+    this.destination,
     required this.destinationAddress,
     required this.currentPosition,
-    required this.members,
+    required this.members, //가장 첫 유저가 관리자.
     required this.departure,
     this.description,
   });

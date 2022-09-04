@@ -13,7 +13,7 @@ class SetDeparture extends AddPartyEvent {
 }
 
 class SetDestinationAddress extends AddPartyEvent {
-  final AutocompletePrediction? destination;
+  final DetailsResponse? destination;
   const SetDestinationAddress({required this.destination});
 
   @override

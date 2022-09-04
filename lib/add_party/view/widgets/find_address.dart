@@ -10,7 +10,7 @@ class FindAddressButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AddPartyBloc>().state;
-    final text = state.destination?.description ?? "도착지를 설정해주세요";
+    final text = state.destination?.result?.name ?? "도착지를 설정해주세요";
     return FullWidthButton(
       text,
       onPressed: () => gotoFindAddress(context),

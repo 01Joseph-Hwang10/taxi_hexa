@@ -9,7 +9,10 @@ import 'package:taxi_hexa/themes/colors.dart';
 class CurrentLocationButton extends StatelessWidget {
   const CurrentLocationButton({
     Key? key,
-  }) : super(key: key);
+  })  : currentLocation = const CurrentLocation(),
+        super(key: key);
+
+  final CurrentLocation currentLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -17,17 +20,28 @@ class CurrentLocationButton extends StatelessWidget {
       icon: Icons.gps_fixed,
       backgroundColor: AppColors.blue,
       borderColor: AppColors.white,
-      onPressed: () async => _onPressed(context),
+      onPressed: () async => currentLocation.show(context),
     );
   }
+}
 
-  Future<void> _onPressed(BuildContext context) async {
+class CurrentLocation {
+  const CurrentLocation();
+
+  Future<LatLng> load(BuildContext context) async {
     final bloc = context.read<LocationBloc>();
-    final position = await getLocation();
+    final position = await _getLocation();
     final target = LatLng(
       position.latitude,
       position.longitude,
     );
+    bloc.add(SetCurrentLocation(currentLocation: target));
+    return target;
+  }
+
+  Future<void> show(BuildContext context) async {
+    final bloc = context.read<LocationBloc>();
+    final target = await load(context);
     final icon = await BitmapDescriptor.fromAssetImage(
       const ImageConfiguration(size: Size(10, 10)),
       'assets/icons/bx_current-location.png',
@@ -45,7 +59,6 @@ class CurrentLocationButton extends StatelessWidget {
         ],
       ),
     );
-    bloc.add(SetCurrentLocation(currentLocation: target));
     final mapController = await bloc.state.controller.future;
     mapController.animateCamera(
       CameraUpdate.newCameraPosition(
@@ -57,7 +70,7 @@ class CurrentLocationButton extends StatelessWidget {
     );
   }
 
-  Future<Position> getLocation() async {
+  Future<Position> _getLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
 

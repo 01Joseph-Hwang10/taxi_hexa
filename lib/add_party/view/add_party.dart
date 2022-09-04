@@ -4,7 +4,6 @@ import 'package:taxi_hexa/add_party/components/components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taxi_hexa/add_party/view/widgets/widgets.dart';
 import 'package:taxi_hexa/app/components/components.dart';
-import 'package:taxi_hexa/app/components/modal.dart';
 
 class AddParty extends StatelessWidget {
   const AddParty({

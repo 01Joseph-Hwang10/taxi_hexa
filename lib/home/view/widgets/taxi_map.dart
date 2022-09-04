@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taxi_hexa/home/components/bottom_buttons/buttons/buttons.dart';
 import 'package:taxi_hexa/home/home.dart';
 import 'package:taxi_hexa/home/models/taxi_party.dart';
 import 'package:taxi_hexa/location/location.dart';
@@ -47,11 +48,16 @@ class _TaxiMapState extends State<TaxiMap> with WidgetsBindingObserver {
   String? darkMapStyle;
   String? lightMapStyle;
 
+  CurrentLocation currentLocation = const CurrentLocation();
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     attachDataListeners();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await currentLocation.load(context);
+    });
   }
 
   @override
@@ -154,7 +160,7 @@ class _TaxiMapState extends State<TaxiMap> with WidgetsBindingObserver {
           );
           showModalBottomSheet(
             context: context,
-            builder: (_) => const PartyInfo(),
+            builder: (_) => PartyInfo(),
           );
         });
     return marker;
