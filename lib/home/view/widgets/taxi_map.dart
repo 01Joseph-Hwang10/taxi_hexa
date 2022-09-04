@@ -136,7 +136,6 @@ class _TaxiMapState extends State<TaxiMap> with WidgetsBindingObserver {
   ///
   /// TODO: 이거보다 좋은 방법이 있지 않을까?
   Map<String, dynamic> parseData(Object? value) {
-    print(value);
     return jsonDecode(jsonEncode(value));
   }
 
