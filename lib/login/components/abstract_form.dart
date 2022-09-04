@@ -68,6 +68,7 @@ abstract class AbstractForm extends StatelessWidget {
       CupertinoTextField(
         fieldName: 'Password',
         controller: passwordTextController,
+        password: true,
       ),
       const SizedBox(height: 15),
       // Submit
