@@ -5,7 +5,7 @@ class AppColors {
 
   AppColors._(); // this basically makes it so you can't instantiate this class
 
-  static const Color white = const Color(0xFFEFEFEF);
-  static const Color blue = const Color(0xFF205375);
-  static const Color darkblue = const Color(0xFF112B3C);
+  static const Color white = Color(0xFFEFEFEF);
+  static const Color blue = Color(0xFF205375);
+  static const Color darkblue = Color(0xFF112B3C);
 }
