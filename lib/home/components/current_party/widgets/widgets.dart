@@ -1,1 +1,1 @@
-export 'current_party_title.dart';
+export 'current_party_content.dart';

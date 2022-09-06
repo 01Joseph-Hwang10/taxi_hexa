@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxi_hexa/home/models/taxi_party.dart';
+import 'package:taxi_hexa/utils/assets.dart';
 
 part 'location_event.dart';
 part 'location_state.dart';
@@ -182,9 +183,24 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
     SetFocusedPartyId event,
     Emitter<LocationState> emit,
   ) {
+    final markers = state.markers;
+    final newMarkers = markers.map(
+      (marker) {
+        if (marker.markerId.value == event.focusedPartyId) {
+          return marker.copyWith(
+            iconParam: markerSelected,
+          );
+        } else {
+          return marker.copyWith(
+            iconParam: markerDefault,
+          );
+        }
+      },
+    ).toSet();
     emit(
       state.copyWith(
         focusedPartyId: event.focusedPartyId,
+        markers: newMarkers,
       ),
     );
   }

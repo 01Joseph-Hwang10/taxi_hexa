@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxi_hexa/app/components/components.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:taxi_hexa/location/constant/constant.dart';
 import 'package:taxi_hexa/location/location.dart';
 import 'package:taxi_hexa/login/login.dart';
 import 'package:collection/collection.dart';
@@ -44,6 +45,7 @@ class JoinButton extends StatelessTaxiMapListener {
   }
 
   void exit(BuildContext context) {
+    Navigator.of(context).maybePop();
     final locationBloc = context.read<LocationBloc>();
     final locationState = locationBloc.state;
     final loginState = context.read<LoginBloc>().state;
@@ -56,10 +58,12 @@ class JoinButton extends StatelessTaxiMapListener {
       {"parties/taxi_party${party?.id}/members": party?.members},
     );
     locationBloc.add(
-      const SetJoinedPartyId(joinedPartyId: null),
+      const SetJoinedPartyId(joinedPartyId: noJoinedPartyId),
+    );
+    locationBloc.add(
+      const SetFocusedPartyId(focusedPartyId: noFocusedPartyId),
     );
     updateMap();
-    Navigator.of(context).maybePop();
   }
 
   void join(
@@ -90,11 +94,13 @@ class JoinButton extends StatelessTaxiMapListener {
       ),
     );
     locationBloc.add(
-      const SetFocusedPartyId(focusedPartyId: null),
+      SetFocusedPartyId(
+        focusedPartyId: party!.id,
+      ),
     );
     locationBloc.add(
       SetJoinedPartyId(
-        joinedPartyId: party!.id,
+        joinedPartyId: party.id,
       ),
     );
     updateMap();

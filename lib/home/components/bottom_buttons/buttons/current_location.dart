@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxi_hexa/home/home.dart';
 import 'package:taxi_hexa/location/location.dart';
 import 'package:taxi_hexa/themes/colors.dart';
+import 'package:taxi_hexa/utils/assets.dart';
 
 class CurrentLocationButton extends StatelessWidget {
   const CurrentLocationButton({
@@ -42,10 +43,6 @@ class CurrentLocation {
   Future<void> show(BuildContext context) async {
     final bloc = context.read<LocationBloc>();
     final target = await load(context);
-    final icon = await BitmapDescriptor.fromAssetImage(
-      const ImageConfiguration(size: Size(10, 10)),
-      'assets/icons/bx_current-location.png',
-    );
     bloc.add(
       AddMarkers(
         markers: [
@@ -54,7 +51,7 @@ class CurrentLocation {
               target.toString(),
             ),
             position: target,
-            icon: icon,
+            icon: currentLocation!,
           ),
         ],
       ),

@@ -26,7 +26,7 @@ class SubHeading extends StatelessWidget {
       children: [
         Flexible(
           child: Text(
-            party!.destinationAddress,
+            party?.destinationAddress ?? "Unknown",
             softWrap: true,
           ),
         ),

@@ -3,6 +3,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:taxi_hexa/home/models/taxi_party.dart';
+import 'package:taxi_hexa/location/constant/constant.dart';
 import 'package:taxi_hexa/location/location.dart';
 import 'package:taxi_hexa/login/login.dart';
 import 'package:taxi_hexa/themes/text_styles.dart';
@@ -24,7 +25,7 @@ class Heading extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          party!.name,
+          party?.name ?? "Unknown",
           textAlign: TextAlign.start,
           style: AppTextStyles.heading1,
         ),
@@ -63,7 +64,10 @@ class Heading extends StatelessWidget {
     FirebaseDatabase.instance.ref("parties/taxi_party${party?.id}").remove();
     Navigator.of(context).maybePop();
     locationBloc.add(
-      const SetJoinedPartyId(joinedPartyId: null),
+      const SetFocusedPartyId(focusedPartyId: noFocusedPartyId),
+    );
+    locationBloc.add(
+      const SetJoinedPartyId(joinedPartyId: noJoinedPartyId),
     );
   }
 }

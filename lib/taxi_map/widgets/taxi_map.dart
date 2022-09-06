@@ -7,11 +7,12 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taxi_hexa/home/components/bottom_buttons/buttons/buttons.dart';
 import 'package:taxi_hexa/home/components/party_info/functions/functions.dart';
-import 'package:taxi_hexa/home/home.dart';
 import 'package:taxi_hexa/home/models/taxi_party.dart';
 import 'package:taxi_hexa/location/location.dart';
+import 'package:taxi_hexa/login/login.dart';
 import 'package:taxi_hexa/taxi_map/taxi_map.dart';
-import 'package:taxi_hexa/utils/constants.dart';
+import 'package:taxi_hexa/utils/assets.dart';
+import 'package:taxi_hexa/utils/constant/constant.dart';
 
 class TaxiMap extends StatefulWidget {
   const TaxiMap({Key? key}) : super(key: key);
@@ -98,25 +99,38 @@ class _TaxiMapState extends StatefulTaxiMapListener<TaxiMap>
   }
 
   void onChildAdded(DatabaseEvent event) async {
-    final bloc = context.read<LocationBloc>();
+    final locationBloc = context.read<LocationBloc>();
+    final loginBloc = context.read<LoginBloc>();
     final party = TaxiPartyModel.fromJson(
       parseData(event.snapshot.value),
     );
-    bloc.add(AddParty(party: party));
-    final marker = await createMarker(party);
-    bloc.add(AddMarker(marker: marker));
-    setState(() {});
+    locationBloc.add(AddParty(party: party));
+    final marker = createMarker(party);
+    locationBloc.add(AddMarker(marker: marker));
+    if (party.members.contains(loginBloc.state.userInfo?.id)) {
+      locationBloc.add(
+        SetFocusedPartyId(
+          focusedPartyId: party.id,
+        ),
+      );
+      locationBloc.add(
+        SetJoinedPartyId(
+          joinedPartyId: party.id,
+        ),
+      );
+    }
+    updateMap();
   }
 
-  void onChildChanged(DatabaseEvent event) async {
+  void onChildChanged(DatabaseEvent event) {
     final bloc = context.read<LocationBloc>();
     final party = TaxiPartyModel.fromJson(
       parseData(event.snapshot.value),
     );
     bloc.add(UpdateParty(party: party));
-    final marker = await createMarker(party);
+    final marker = createMarker(party);
     bloc.add(UpdateMarker(marker: marker));
-    setState(() {});
+    updateMap();
   }
 
   void onChildRemoved(DatabaseEvent event) {
@@ -129,7 +143,7 @@ class _TaxiMapState extends StatefulTaxiMapListener<TaxiMap>
       (marker) => marker.markerId == MarkerId(party.id),
     );
     bloc.add(RemoveMarker(marker: marker));
-    setState(() {});
+    updateMap();
   }
 
   /// See: https://stackoverflow.com/questions/70595225/cant-cast-internallinkedhashmapobject-object-to-anything
@@ -142,19 +156,21 @@ class _TaxiMapState extends StatefulTaxiMapListener<TaxiMap>
     return jsonDecode(jsonEncode(value));
   }
 
-  Future<Marker> createMarker(TaxiPartyModel party) async {
-    final icon = await BitmapDescriptor.fromAssetImage(
-      ImageConfiguration.empty,
-      'assets/icons/marker-default.png',
+  Marker createMarker(TaxiPartyModel party) {
+    final position = LatLng(
+      party.currentPosition!.latitude,
+      party.currentPosition!.longitude,
     );
+    final id = MarkerId(party.id);
+    void onTap() {
+      showPartyInfoModal(context, party);
+    }
+
     final marker = Marker(
-      markerId: MarkerId(party.id),
-      position: LatLng(
-        party.currentPosition!.latitude,
-        party.currentPosition!.longitude,
-      ),
-      icon: icon,
-      onTap: () => showPartyInfoModal(context, party),
+      markerId: id,
+      position: position,
+      icon: markerDefault!,
+      onTap: onTap,
     );
     return marker;
   }

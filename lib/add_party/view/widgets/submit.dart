@@ -74,7 +74,9 @@ class Submit extends StatelessWidget {
       ),
     );
     locationBloc.add(
-      const SetFocusedPartyId(focusedPartyId: null),
+      SetFocusedPartyId(
+        focusedPartyId: newParty.id,
+      ),
     );
     locationBloc.add(
       SetJoinedPartyId(
