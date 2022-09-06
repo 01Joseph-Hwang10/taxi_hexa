@@ -55,7 +55,7 @@ abstract class AbstractForm extends StatelessWidget {
       // Title
       Text(
         title,
-        style: AppTextStyles.heading,
+        style: AppTextStyles.heading1,
       ),
       const SizedBox(height: 15),
       // Email

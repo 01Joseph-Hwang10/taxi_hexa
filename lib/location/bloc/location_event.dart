@@ -91,3 +91,19 @@ class SetFocusedPartyId extends LocationEvent {
   @override
   List<Object?> get props => [focusedPartyId];
 }
+
+class SetTimer extends LocationEvent {
+  final Timer? timer;
+  const SetTimer({required this.timer});
+
+  @override
+  List<Object?> get props => [timer];
+}
+
+class SetJoinedPartyId extends LocationEvent {
+  final String? joinedPartyId;
+  const SetJoinedPartyId({required this.joinedPartyId});
+
+  @override
+  List<Object?> get props => [joinedPartyId];
+}

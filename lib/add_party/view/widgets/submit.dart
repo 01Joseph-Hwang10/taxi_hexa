@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +32,9 @@ class Submit extends StatelessWidget {
   }
 
   Future<void> _onPressed(BuildContext context, [bool mounted = true]) async {
+    final locationBloc = context.read<LocationBloc>();
     final addPartyState = context.read<AddPartyBloc>().state;
-    final locationState = context.read<LocationBloc>().state;
+    final locationState = locationBloc.state;
     final loginState = context.read<LoginBloc>().state;
     if (addPartyState.name == '') return;
     if (addPartyState.destination?.result?.name == null) return;
@@ -63,5 +63,23 @@ class Submit extends StatelessWidget {
     );
     if (!mounted) return;
     Navigator.of(context).pop();
+    final target = newParty.currentPosition;
+    final mapController = await locationState.controller.future;
+    mapController.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: target!,
+          zoom: 15,
+        ),
+      ),
+    );
+    locationBloc.add(
+      const SetFocusedPartyId(focusedPartyId: null),
+    );
+    locationBloc.add(
+      SetJoinedPartyId(
+        joinedPartyId: newParty.id,
+      ),
+    );
   }
 }

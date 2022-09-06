@@ -19,8 +19,33 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
     on<AddParties>(_onAddParties);
     on<AddParty>(_onAddParty);
     on<UpdateParty>(_onUpdateParty);
+    on<RemoveParty>(_onRemoveParty);
     on<SetCurrentLocation>(_onSetCurrentLocation);
     on<SetFocusedPartyId>(_onSetFocusedPartyId);
+    on<SetTimer>(_onSetTimer);
+    on<SetJoinedPartyId>(_onSetJoinedPartyId);
+  }
+
+  void _onSetJoinedPartyId(
+    SetJoinedPartyId event,
+    Emitter<LocationState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        joinedPartyId: event.joinedPartyId,
+      ),
+    );
+  }
+
+  void _onSetTimer(
+    SetTimer event,
+    Emitter<LocationState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        timer: event.timer,
+      ),
+    );
   }
 
   void _onMapLoaded(
@@ -133,6 +158,19 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
     if (index != -1) {
       parties[index] = event.party;
     }
+    emit(
+      state.copyWith(
+        parties: parties,
+      ),
+    );
+  }
+
+  void _onRemoveParty(
+    RemoveParty event,
+    Emitter<LocationState> emit,
+  ) {
+    final parties = state.parties;
+    parties.remove(event.party);
     emit(
       state.copyWith(
         parties: parties,

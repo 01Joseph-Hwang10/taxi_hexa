@@ -64,7 +64,7 @@ class CurrentLocation {
       CameraUpdate.newCameraPosition(
         CameraPosition(
           target: target,
-          zoom: 16,
+          zoom: 15,
         ),
       ),
     );

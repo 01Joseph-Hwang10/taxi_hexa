@@ -11,7 +11,7 @@ class ModalTitle extends StatelessWidget {
     return const Text(
       "택시팟 생성",
       textAlign: TextAlign.start,
-      style: AppTextStyles.heading,
+      style: AppTextStyles.heading1,
     );
   }
 }

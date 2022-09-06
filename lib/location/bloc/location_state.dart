@@ -16,6 +16,8 @@ class LocationState extends Equatable {
     required this.currentLocation,
     required this.parties,
     required this.focusedPartyId,
+    required this.timer,
+    required this.joinedPartyId,
   });
 
   /// Initial [LocationState].
@@ -27,6 +29,8 @@ class LocationState extends Equatable {
           currentLocation: null,
           parties: [],
           focusedPartyId: null,
+          joinedPartyId: null,
+          timer: null,
         );
 
   final LatLng? currentLocation;
@@ -37,6 +41,8 @@ class LocationState extends Equatable {
   final Set<Marker> markers;
   final List<TaxiPartyModel> parties;
   final String? focusedPartyId;
+  final String? joinedPartyId;
+  final Timer? timer;
 
   /// Creates a copy of [LocationState].
   LocationState copyWith({
@@ -46,6 +52,8 @@ class LocationState extends Equatable {
     LatLng? currentLocation,
     List<TaxiPartyModel>? parties,
     String? focusedPartyId,
+    Timer? timer,
+    String? joinedPartyId,
   }) {
     return LocationState(
       status: status ?? this.status,
@@ -54,6 +62,8 @@ class LocationState extends Equatable {
       currentLocation: currentLocation ?? this.currentLocation,
       parties: parties ?? this.parties,
       focusedPartyId: focusedPartyId ?? this.focusedPartyId,
+      timer: timer ?? this.timer,
+      joinedPartyId: joinedPartyId ?? this.joinedPartyId,
     );
   }
 
@@ -65,5 +75,7 @@ class LocationState extends Equatable {
         currentLocation,
         parties,
         focusedPartyId,
+        timer,
+        joinedPartyId,
       ];
 }

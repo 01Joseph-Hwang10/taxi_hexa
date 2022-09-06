@@ -24,6 +24,13 @@ class ActionButton extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all(
           backgroundColor ?? AppColors.blue,
         ),
+        shape: MaterialStateProperty.all<OutlinedBorder>(
+          const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(12.5),
+            ),
+          ),
+        ),
       ),
       child: child,
     );

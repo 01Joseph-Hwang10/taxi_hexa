@@ -18,7 +18,7 @@ class BottomButtons extends StatelessWidget {
           SizedBox(width: 5),
           AddPartyButton(),
           SizedBox(width: 5),
-          RefreshButton(),
+          ListButton(),
         ],
       ),
     );

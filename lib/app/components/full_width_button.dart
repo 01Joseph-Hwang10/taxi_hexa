@@ -25,12 +25,12 @@ class FullWidthButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: disabled ? null : onPressed,
       style: ElevatedButton.styleFrom(
-        primary: AppColors.blue,
+        primary: color ?? AppColors.blue,
         minimumSize: Size.fromHeight(dense ? 30 : 50),
       ),
       child: Text(
         text,
-        style: AppTextStyles.subHeading,
+        style: AppTextStyles.heading2,
         textAlign: TextAlign.center,
       ),
     );

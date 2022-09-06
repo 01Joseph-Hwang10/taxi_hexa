@@ -6,9 +6,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taxi_hexa/home/components/bottom_buttons/buttons/buttons.dart';
+import 'package:taxi_hexa/home/components/party_info/functions/functions.dart';
 import 'package:taxi_hexa/home/home.dart';
 import 'package:taxi_hexa/home/models/taxi_party.dart';
 import 'package:taxi_hexa/location/location.dart';
+import 'package:taxi_hexa/taxi_map/taxi_map.dart';
 import 'package:taxi_hexa/utils/constants.dart';
 
 class TaxiMap extends StatefulWidget {
@@ -24,9 +26,10 @@ CameraPosition initialCameraPosition = const CameraPosition(
 
 /// See: https://medium.com/swlh/switch-to-dark-mode-in-real-time-with-flutter-and-google-maps-f0f080cd72e9
 /// TODO: Implement UI by color theme (light/dark)
-class _TaxiMapState extends State<TaxiMap> with WidgetsBindingObserver {
+class _TaxiMapState extends StatefulTaxiMapListener<TaxiMap>
+    with WidgetsBindingObserver {
   @override
-  Widget build(BuildContext context) {
+  Widget buildWithMapUpdate(BuildContext context) {
     final bloc = context.watch<LocationBloc>();
     final state = bloc.state;
     return GoogleMap(
@@ -140,29 +143,19 @@ class _TaxiMapState extends State<TaxiMap> with WidgetsBindingObserver {
   }
 
   Future<Marker> createMarker(TaxiPartyModel party) async {
-    final bloc = context.read<LocationBloc>();
     final icon = await BitmapDescriptor.fromAssetImage(
       ImageConfiguration.empty,
       'assets/icons/marker-default.png',
     );
     final marker = Marker(
-        markerId: MarkerId(party.id),
-        position: LatLng(
-          party.currentPosition!.latitude,
-          party.currentPosition!.longitude,
-        ),
-        icon: icon,
-        onTap: () {
-          bloc.add(
-            SetFocusedPartyId(
-              focusedPartyId: party.id,
-            ),
-          );
-          showModalBottomSheet(
-            context: context,
-            builder: (_) => PartyInfo(),
-          );
-        });
+      markerId: MarkerId(party.id),
+      position: LatLng(
+        party.currentPosition!.latitude,
+        party.currentPosition!.longitude,
+      ),
+      icon: icon,
+      onTap: () => showPartyInfoModal(context, party),
+    );
     return marker;
   }
 }

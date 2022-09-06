@@ -1,56 +1,29 @@
 import 'package:flutter/material.dart';
 
-class AbsoluteAlign extends StatelessWidget {
-  const AbsoluteAlign({
-    Key? key,
-    Alignment? alignment,
-    bool? safearea,
-    required this.child,
-    this.width,
-    this.height,
-  })  : alignment = alignment ?? Alignment.topLeft,
-        safearea = safearea ?? false,
-        super(key: key);
+class AbsoluteAlignAnimation {
+  const AbsoluteAlignAnimation({
+    required this.isActive,
+    double? horizontalMovement,
+    double? verticalMovement,
+    this.alignment,
+  })  : horizontalMovement = horizontalMovement ?? 0,
+        verticalMovement = verticalMovement ?? 0;
 
-  final Alignment alignment;
-  final Widget child;
-  final double? width;
-  final double? height;
-  final bool safearea;
+  final Alignment? alignment;
+  final double horizontalMovement;
+  final double verticalMovement;
+  final bool isActive;
 
-  @override
-  Widget build(BuildContext context) {
-    final position = calculatePosition(context);
-    return Positioned(
-      top: position.top,
-      left: position.left,
-      bottom: position.bottom,
-      right: position.right,
-      width: width,
-      height: height,
-      child: buildInner(context),
-    );
+  double? calculateAnimatedPosX(double? value) {
+    if (value == null) return null;
+    if (isActive) return value + horizontalMovement;
+    return value;
   }
 
-  Widget buildInner(BuildContext context) {
-    if (safearea) {
-      return SafeArea(
-        child: child,
-      );
-    } else {
-      return child;
-    }
-  }
-
-  AbsoluteAlignPosition calculatePosition(BuildContext context) {
-    final position = AbsoluteAlignPosition(
-      context: context,
-      alignment: alignment,
-      horizontalMovement: 0,
-      verticalMovement: 0,
-      isActive: false,
-    );
-    return position;
+  double? calculateAnimatedPosY(double? value) {
+    if (value == null) return null;
+    if (isActive) return value + verticalMovement;
+    return value;
   }
 }
 

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 BoxDecoration modalDecoration = const BoxDecoration(
   color: Colors.white,
-  borderRadius: BorderRadius.only(
-    topLeft: Radius.circular(20),
-    topRight: Radius.circular(20),
-  ),
+  // TODO: Implement rounded corners uniformly for all modals
+  // borderRadius: BorderRadius.only(
+  //   topLeft: Radius.circular(20),
+  //   topRight: Radius.circular(20),
+  // ),
 );
 
 class BottomModal extends StatelessWidget {
