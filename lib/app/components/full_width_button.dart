@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taxi_hexa/themes/colors.dart';
 import 'package:taxi_hexa/themes/text_styles.dart';
 
 class FullWidthButton extends StatelessWidget {
@@ -24,7 +25,7 @@ class FullWidthButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: disabled ? null : onPressed,
       style: ElevatedButton.styleFrom(
-        primary: color,
+        primary: AppColors.blue,
         minimumSize: Size.fromHeight(dense ? 30 : 50),
       ),
       child: Text(

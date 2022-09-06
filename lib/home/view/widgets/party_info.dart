@@ -5,6 +5,7 @@ import 'package:taxi_hexa/location/location.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:collection/collection.dart';
 import 'package:taxi_hexa/login/bloc/login_bloc.dart';
+import 'package:taxi_hexa/themes/colors.dart';
 import 'package:taxi_hexa/themes/text_styles.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -31,7 +32,18 @@ class PartyInfo extends StatelessWidget {
               style: AppTextStyles.heading,
             ),
             (currentuser!.user!.uid.toString() == party.members.first)
-                ? ElevatedButton(onPressed: () {}, child: Text("수정"))
+                ? ElevatedButton(
+                    onPressed: () {
+                      FirebaseDatabase.instance
+                          .ref("parties/taxi_party${party.id}")
+                          .remove();
+                      joinActive = false;
+                    },
+                    child: Text("삭제"),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(AppColors.blue)),
+                  )
                 : (party.members
                         .where((element) =>
                             element == currentuser!.user!.uid.toString())
@@ -48,7 +60,11 @@ class PartyInfo extends StatelessWidget {
                                 joinActive = false;
                               }
                             : null,
-                        child: Text("참여"))
+                        child: Text("참여"),
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(AppColors.blue)),
+                      )
                     : ElevatedButton(
                         onPressed: (joinActive)
                             ? () {
@@ -61,13 +77,31 @@ class PartyInfo extends StatelessWidget {
                                 joinActive = false;
                               }
                             : null,
-                        child: Text("탈퇴")),
+                        child: Text("탈퇴"),
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(AppColors.blue)),
+                      ),
           ],
         ),
         const SizedBox(height: 10),
-        Text("인원 수: ${party.members.length.toString()}명"),
         const SizedBox(height: 10),
         _SubHeading(party: party),
+        const SizedBox(height: 10),
+        Row(
+          children: [Icon(Icons.access_time), Text("출발: ")],
+        ),
+        const SizedBox(height: 3),
+        Row(
+          children: [
+            Icon(Icons.access_time),
+            Text("인원: ${party.members.length.toString()}명"),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [Text("설명: ${party.description}")],
+        ),
         const SizedBox(height: 10),
       ],
     );
@@ -88,7 +122,12 @@ class _SubHeading extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(party?.description ?? ""),
+        Container(
+          child: Text(
+            "목적지: " + party!.destinationAddress,
+          ),
+          width: 250,
+        ),
         ElevatedButton(
           onPressed: () {},
           child: Row(
@@ -99,6 +138,8 @@ class _SubHeading extends StatelessWidget {
               Text("지도"),
             ],
           ),
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(AppColors.blue)),
         ),
       ],
     );
