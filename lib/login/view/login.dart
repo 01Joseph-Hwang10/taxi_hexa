@@ -40,18 +40,18 @@ class Login extends AbstractForm {
 
   void login(BuildContext context) async {
     try {
-      currentuser = await auth.signInWithEmailAndPassword(
+      final currentUser = await auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      if (currentuser!.user == null) throw Exception("User not found");
+      if (currentUser.user == null) throw Exception("User not found");
       final bloc = context.read<LoginBloc>();
       bloc.add(
         LoggedIn(
           UserModel(
-            id: currentuser!.user!.uid,
-            name: currentuser!.additionalUserInfo?.username ??
-                currentuser!.user!.displayName ??
+            id: currentUser.user!.uid,
+            name: currentUser.additionalUserInfo?.username ??
+                currentUser.user!.displayName ??
                 email,
           ),
         ),
