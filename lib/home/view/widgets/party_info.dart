@@ -31,7 +31,16 @@ class PartyInfo extends StatelessWidget {
               style: AppTextStyles.heading,
             ),
             (currentuser!.user!.uid.toString() == party.members.first)
-                ? ElevatedButton(onPressed: () {}, child: Text("수정"))
+                // ? ElevatedButton(onPressed: () {}, child: Text("수정"))
+                ? ElevatedButton(
+                    onPressed: () {
+                      FirebaseDatabase.instance
+                          .ref("parties/taxi_party${party.id}")
+                          .remove();
+                      joinActive = false;
+                    },
+                    child: Text("삭제"),
+                  )
                 : (party.members
                         .where((element) =>
                             element == currentuser!.user!.uid.toString())
