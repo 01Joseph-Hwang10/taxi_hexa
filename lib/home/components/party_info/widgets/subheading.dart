@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taxi_hexa/location/location.dart';
 import 'package:taxi_hexa/taxi_map/taxi_map.dart';
 
-const destinationMarkerId = MarkerId('destination');
+const destinationMarkerId = MarkerId('Destination');
 
 class SubHeading extends StatelessWidget {
   const SubHeading({
@@ -86,7 +86,7 @@ class SubHeading extends StatelessWidget {
 
   Marker createDestinationMarker() {
     final marker = Marker(
-      markerId: const MarkerId("destination"),
+      markerId: destinationMarkerId,
       position: LatLng(
         party!.destination!.latitude,
         party!.destination!.longitude,

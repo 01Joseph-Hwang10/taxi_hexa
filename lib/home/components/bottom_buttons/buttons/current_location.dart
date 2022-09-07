@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxi_hexa/home/home.dart';
 import 'package:taxi_hexa/location/location.dart';
+import 'package:taxi_hexa/taxi_map/notifier/map_notifier.dart';
 import 'package:taxi_hexa/themes/colors.dart';
 import 'package:taxi_hexa/utils/assets.dart';
 
@@ -26,6 +27,8 @@ class CurrentLocationButton extends StatelessWidget {
   }
 }
 
+const currentLocationMarkerId = MarkerId('CurrentLocation');
+
 class CurrentLocation {
   const CurrentLocation();
 
@@ -47,8 +50,8 @@ class CurrentLocation {
       AddMarkers(
         markers: [
           Marker(
-            markerId: MarkerId(
-              target.toString(),
+            markerId: const MarkerId(
+              'CurrentLocation',
             ),
             position: target,
             icon: currentLocation!,
@@ -65,6 +68,7 @@ class CurrentLocation {
         ),
       ),
     );
+    updateMap();
   }
 
   Future<Position> _getLocation() async {
