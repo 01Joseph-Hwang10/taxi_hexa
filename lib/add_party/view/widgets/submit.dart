@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ import 'package:taxi_hexa/location/location.dart';
 import 'package:taxi_hexa/login/login.dart';
 import 'package:taxi_hexa/themes/colors.dart';
 import 'package:uuid/uuid.dart';
+import 'package:collection/collection.dart';
 
 class Submit extends StatelessWidget {
   const Submit({
@@ -82,6 +85,13 @@ class Submit extends StatelessWidget {
       SetJoinedPartyId(
         joinedPartyId: newParty.id,
       ),
+    );
+    Marker? currentLocation = locationState.markers.firstWhereOrNull(
+      (element) => false,
+    );
+    if (currentLocation == null) return;
+    locationBloc.add(
+      RemoveMarker(marker: currentLocation),
     );
   }
 }
