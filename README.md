@@ -16,6 +16,12 @@ UNIST의 입지적 특성상 택시를 타고 시내나 울산역으로 이동�
 
 <img width="722" alt="join-taxi-party" src="https://github.com/01Joseph-Hwang10/taxi_hexa/assets/72839543/30f9147a-baf3-4106-b0ef-d24d58afcbe5">
 
+## Tech Stack
+
+- Flutter
+- BLoC
+- Google Maps Platform
+
 ## Getting Started
 
 ### Firebase settings
