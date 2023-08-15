@@ -2,6 +2,16 @@
 
 택시팟 매칭 플랫폼: Taxi Hexa
 
+UNIST의 입지적 특성상 택시를 타고 시내나 울산역으로 이동하는데 많은 비용이 들어 갑니다. 이를 해결하기 위해 택시를 타는 사람들을 모아 택시비를 절약할 수 있도록 도와주는 택시팟 매칭 플랫폼 Taxi Hexa를 개발하였습니다.
+
+전체 프로젝트 소개는 [여기](https://docs.google.com/presentation/d/1diw18e7jkFyxoNhdG-CTJ_SvW0I1bmjpWzMkUdhEdk8/edit?usp=sharing)를 참조해주세요
+
+## Showcase
+
+### 택시팟 생성
+
+### 택시팟 참여
+
 ## Getting Started
 
 ### Firebase settings
